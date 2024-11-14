@@ -1,6 +1,6 @@
 {
   "name": "@kakao/capacitor-kakao",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "private": false,
   "description": "capacitor for kakao",
   "main": "dist/plugin.cjs.js",
