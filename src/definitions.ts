@@ -1,4 +1,4 @@
-export interface KakaoLoginPlugin {
+export interface KakaoPlugin {
   goLogin(): Promise<{
     accessToken: string;
     expiredAt: string;

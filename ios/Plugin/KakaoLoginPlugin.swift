@@ -23,8 +23,8 @@ extension Encodable {
     }
 }
 
-@objc(KakaoLoginPlugin)
-public class KakaoLoginPlugin: CAPPlugin {
+@objc(KakaoPlugin)
+public class KakaoPlugin: CAPPlugin {
     private var safariViewController: SFSafariViewController?
     func parseOAuthToken(oauthToken: OAuthToken) -> [String: Any] {
         var oauthTokenInfos: [String: Any] = [

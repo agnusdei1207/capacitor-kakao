@@ -20,8 +20,8 @@ import com.kakao.sdk.template.model.Link
 import timber.log.Timber
 import java.lang.Exception
 
-@CapacitorPlugin(name = "KakaoLoginPlugin")
-class KakaoLoginPlugin : Plugin() {
+@CapacitorPlugin(name = "KakaoPlugin")
+class KakaoPlugin : Plugin() {
     companion object {
         @JvmStatic
         private val gson = Gson()

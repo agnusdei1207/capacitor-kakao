@@ -10,7 +10,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "dist/esm",
+    "outDir": "./dist",
     "pretty": true,
     "sourceMap": true,
     "strict": true,
