@@ -1,13 +1,14 @@
 export interface KakaoLoginPlugin {
   goLogin(): Promise<{
-    "accessToken": string,
-    "expiredAt": string,
-    "expiresIn": string,
-    "refreshToken": string,
-    "idToken": string,
-    "refreshTokenExpiredAt": string,
-    "refreshTokenExpiresIn": string,
-    "tokenType": string}>;
+    accessToken: string;
+    expiredAt: string;
+    expiresIn: string;
+    refreshToken: string;
+    idToken: string;
+    refreshTokenExpiredAt: string;
+    refreshTokenExpiresIn: string;
+    tokenType: string;
+  }>;
   goLogout(): Promise<any>;
   getUserInfo(): Promise<{ value: any }>;
   sendLinkFeed(options: {
@@ -19,7 +20,5 @@ export interface KakaoLoginPlugin {
     imageWidth?: number;
     imageHeight?: number;
   }): Promise<void>;
-  talkInChannel(options: {
-    publicId: string;
-  }): Promise<any>;
+  talkInChannel(options: { publicId: string }): Promise<any>;
 }

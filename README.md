@@ -14,6 +14,28 @@ npm install @kakao/capacitor-kakao-login
 npx cap sync
 ```
 
+## Using npm link
+
+To use this project locally with `npm link`, follow these steps:
+
+1. Build the project:
+
+   ```sh
+   npm run build
+   ```
+
+2. Link the project globally:
+
+   ```sh
+   npm link
+   ```
+
+3. Link the project in your target project:
+   ```sh
+   cd /path/to/your/target/project
+   npm link capacitor-kakao-login
+   ```
+
 ## API
 
 <docgen-index>
@@ -86,6 +108,4 @@ talkInChannel(options: { publicId: string; }) => Promise<any>
 ---
 
 </docgen-api>
-# capacitor-kakao
-# capacitor-kakao
 # capacitor-kakao
