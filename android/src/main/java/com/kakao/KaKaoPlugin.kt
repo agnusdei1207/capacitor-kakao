@@ -83,13 +83,12 @@ class KakaoPlugin : Plugin() {
     fun sendLinkFeed(call: PluginCall) {
         val imageLinkUrl = call.getString("imageLinkUrl")
         val imageUrl = call.getString("imageUrl") ?: ""
+        val link = call.getString("link") ?: ""
         val title = call.getString("title") ?: ""
-        val description = call.getString("description")
+        val description = call.getString("description") ?: ""
         val buttonTitle = call.getString("buttonTitle") ?: ""
         val imageWidth: Int? = call.getInt("imageWidth")
         val imageHeight: Int? = call.getInt("imageHeight")
-
-        val link = Link(imageLinkUrl, imageLinkUrl, null, null)
         val content = Content(title, imageUrl, link, description, imageWidth, imageHeight)
         val buttons = ArrayList<Button>()
         buttons.add(Button(buttonTitle, link))

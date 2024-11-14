@@ -15,6 +15,7 @@ export interface KakaoPlugin {
     title: string;
     description: string;
     imageUrl: string;
+    link: string;
     imageLinkUrl: string;
     buttonTitle: string;
     imageWidth?: number;
