@@ -22,6 +22,23 @@ import java.lang.Exception
 
 @CapacitorPlugin(name = "KakaoPlugin")
 class KakaoPlugin : Plugin() {
+    override fun load() {
+        super.load()
+        val context = context
+        val config = config
+        val clientId = config.getString("clientId")
+        val kakao_app_key = config.getString("kakao_app_key")
+
+        Timber.i("clientId >>>>> $clientId")
+        Timber.i("kakao_app_key >>>>> $kakao_app_key")
+
+        KakaoPlugin.apply {
+            initialize(context, clientId)
+        }
+
+        Timber.i("카카오 로그인 플러그인 로드 ✅")
+    }
+
     companion object {
         @JvmStatic
         private val gson = Gson()
@@ -63,11 +80,12 @@ class KakaoPlugin : Plugin() {
             UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
         }
     }
+
     @PluginMethod
     fun talkInChannel(call: PluginCall) {
         try {
             val publicId: String = call.getString("publicId") ?: ""
-            if(publicId != "") {
+            if (publicId != "") {
                 val url = TalkApiClient.instance.channelChatUrl(publicId)
                 KakaoCustomTabsClient.openWithDefault(context, url)
                 call.resolve()
@@ -79,6 +97,7 @@ class KakaoPlugin : Plugin() {
             call.reject(e.toString())
         }
     }
+
     @PluginMethod
     fun sendLinkFeed(call: PluginCall) {
         val imageLinkUrl = call.getString("imageLinkUrl")
@@ -94,31 +113,33 @@ class KakaoPlugin : Plugin() {
         buttons.add(Button(buttonTitle, link))
         val feed = FeedTemplate(content, null, null, buttons)
         ShareClient.instance
-                .shareDefault(
-                        activity,
-                        feed
-                ) { linkResult: SharingResult?, error: Throwable? ->
-                    if (error != null) {
-                        call.reject("kakao link failed: $error")
-                    } else if (linkResult != null) {
-                        activity.startActivity(linkResult.intent)
-                    }
-                    call.resolve()
+            .shareDefault(
+                activity,
+                feed
+            ) { linkResult: SharingResult?, error: Throwable? ->
+                if (error != null) {
+                    call.reject("kakao link failed: $error")
+                } else if (linkResult != null) {
+                    activity.startActivity(linkResult.intent)
                 }
+                call.resolve()
+            }
     }
+
     @PluginMethod
     fun getUserInfo(call: PluginCall) {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Timber.e(TAG, "Kakao user request failed", error)
                 call.reject(error.toString())
-            }
-            else if (user != null) {
-                Timber.i(TAG, "Kakao user request succeed" +
-                        "\nid: ${user.id}" +
-                        "\nemail: ${user.kakaoAccount?.email}" +
-                        "\nnickname: ${user.kakaoAccount?.profile?.nickname}" +
-                        "\nthumbnail: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+            } else if (user != null) {
+                Timber.i(
+                    TAG, "Kakao user request succeed" +
+                            "\nid: ${user.id}" +
+                            "\nemail: ${user.kakaoAccount?.email}" +
+                            "\nnickname: ${user.kakaoAccount?.profile?.nickname}" +
+                            "\nthumbnail: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                )
                 val userJsonData = JSObject(gson.toJson(user).toString())
                 call.resolve(JSObject().also {
                     it.put("value", userJsonData)
@@ -128,13 +149,14 @@ class KakaoPlugin : Plugin() {
             }
         }
     }
+
     @PluginMethod
     fun goLogout(call: PluginCall) {
         UserApiClient.instance.logout { error ->
             if (error != null) {
                 call.reject("Logout Failed")
             } else {
-                call.success()
+                call.resolve()
             }
         }
     }

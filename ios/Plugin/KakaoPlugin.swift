@@ -26,6 +26,55 @@ extension Encodable {
 @objc(KakaoPlugin)
 public class KakaoPlugin: CAPPlugin {
     private var safariViewController: SFSafariViewController?
+
+        public override func load() {
+        instance?.isNaverAppOauthEnable = true;
+        instance?.isInAppOauthEnable = false;
+        instance?.isOnlyPortraitSupportedInIphone();
+        
+//        let useNaverApp = getConfig().getBoolean("useNaverApp", false)
+//        
+//        if (useNaverApp) {
+//            instance?.isNaverAppOauthEnable = true;
+//            instance?.isInAppOauthEnable = false;
+//        } else {
+//            instance?.isNaverAppOauthEnable = false;
+//            instance?.isInAppOauthEnable = true
+//        }
+        
+        instance?.isNaverAppOauthEnable = false;
+        instance?.isInAppOauthEnable = true;
+
+        if let serviceUrlScheme = getConfig().getString("urlScheme")  {
+            instance?.serviceUrlScheme = serviceUrlScheme;
+        }
+
+        if let consumerKey = getConfig().getString("clientId")  {
+            instance?.consumerKey = consumerKey;
+        }
+        
+        if let consumerSecret = getConfig().getString("clientSecret")  {
+            instance?.consumerSecret = consumerSecret;
+        }
+
+        
+        if let oAuthClientName = getConfig().getString("clientName")  {
+            instance?.appName = oAuthClientName;
+        }
+
+        instance?.delegate = self;
+    
+    }
+
+    @objc public func initialize(_ call: CAPPluginCall) {
+        if let clientId = call.getString("clientId") {
+            KakaoSDK.initSDK(appKey: clientId)
+            call.resolve()
+        } else {
+            call.reject("clientId is required")
+        }
+    }
+
     func parseOAuthToken(oauthToken: OAuthToken) -> [String: Any] {
         var oauthTokenInfos: [String: Any] = [
             "success": true,

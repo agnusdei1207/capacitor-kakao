@@ -1,3 +1,5 @@
+/// <reference types="@capacitor/cli" />
+
 export interface KakaoPlugin {
   goLogin(): Promise<{
     accessToken: string;
@@ -22,4 +24,25 @@ export interface KakaoPlugin {
     imageHeight?: number;
   }): Promise<void>;
   talkInChannel(options: { publicId: string }): Promise<any>;
+}
+
+declare module '@capacitor/cli' {
+  export interface KakaoPlugin {
+    CapacitorKakao?: {
+      /**
+       * The client ID of the application.
+       */
+      clientId?: string;
+      /**
+       * The client secret of the application.
+       */
+      clientSecret?: string;
+      /**
+       * The client name of the application.
+       */
+      clientName?: string;
+      urlScheme?: string;
+      // useNaverApp?: boolean;
+    };
+  }
 }
