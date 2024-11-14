@@ -1,7 +1,8 @@
 {
-  "name": "@kakao/capacitor-kakao-login",
+  "name": "@kakao/capacitor-kakao",
   "version": "1.0.1",
-  "description": "capacitor for kakao login",
+  "private": false,
+  "description": "capacitor for kakao",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -11,7 +12,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "kakaoCapacitorKakaoLogin.podspec"
+    "kakaoCapacitorLogin.podspec"
   ],
   "author": "",
   "license": "MIT",

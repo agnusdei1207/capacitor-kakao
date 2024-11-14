@@ -40,11 +40,11 @@ To use this project locally with `npm link`, follow these steps:
 
 <docgen-index>
 
-- [`goLogin()`](#gologin)
-- [`goLogout()`](#gologout)
-- [`getUserInfo()`](#getuserinfo)
-- [`sendLinkFeed(...)`](#sendlinkfeed)
-- [`talkInChannel(...)`](#talkinchannel)
+* [`goLogin()`](#gologin)
+* [`goLogout()`](#gologout)
+* [`getUserInfo()`](#getuserinfo)
+* [`sendLinkFeed(...)`](#sendlinkfeed)
+* [`talkInChannel(...)`](#talkinchannel)
 
 </docgen-index>
 
@@ -54,12 +54,13 @@ To use this project locally with `npm link`, follow these steps:
 ### goLogin()
 
 ```typescript
-goLogin() => Promise<{ "accessToken": string; "expiredAt": string; "expiresIn": string; "refreshToken": string; "idToken": string; "refreshTokenExpiredAt": string; "refreshTokenExpiresIn": string; "tokenType": string; }>
+goLogin() => Promise<{ accessToken: string; expiredAt: string; expiresIn: string; refreshToken: string; idToken: string; refreshTokenExpiredAt: string; refreshTokenExpiresIn: string; tokenType: string; }>
 ```
 
 **Returns:** <code>Promise&lt;{ accessToken: string; expiredAt: string; expiresIn: string; refreshToken: string; idToken: string; refreshTokenExpiredAt: string; refreshTokenExpiresIn: string; tokenType: string; }&gt;</code>
 
----
+--------------------
+
 
 ### goLogout()
 
@@ -69,7 +70,8 @@ goLogout() => Promise<any>
 
 **Returns:** <code>Promise&lt;any&gt;</code>
 
----
+--------------------
+
 
 ### getUserInfo()
 
@@ -79,7 +81,8 @@ getUserInfo() => Promise<{ value: any; }>
 
 **Returns:** <code>Promise&lt;{ value: any; }&gt;</code>
 
----
+--------------------
+
 
 ### sendLinkFeed(...)
 
@@ -91,7 +94,8 @@ sendLinkFeed(options: { title: string; description: string; imageUrl: string; im
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **`options`** | <code>{ title: string; description: string; imageUrl: string; imageLinkUrl: string; buttonTitle: string; imageWidth?: number; imageHeight?: number; }</code> |
 
----
+--------------------
+
 
 ### talkInChannel(...)
 
@@ -105,7 +109,7 @@ talkInChannel(options: { publicId: string; }) => Promise<any>
 
 **Returns:** <code>Promise&lt;any&gt;</code>
 
----
+--------------------
 
 </docgen-api>
 # capacitor-kakao
