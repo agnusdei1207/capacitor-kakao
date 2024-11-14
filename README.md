@@ -87,12 +87,12 @@ getUserInfo() => Promise<{ value: any; }>
 ### sendLinkFeed(...)
 
 ```typescript
-sendLinkFeed(options: { title: string; description: string; imageUrl: string; imageLinkUrl: string; buttonTitle: string; imageWidth?: number; imageHeight?: number; }) => Promise<void>
+sendLinkFeed(options: { title: string; description: string; imageUrl: string; link: string; imageLinkUrl: string; buttonTitle: string; imageWidth?: number; imageHeight?: number; }) => Promise<void>
 ```
 
-| Param         | Type                                                                                                                                                         |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`options`** | <code>{ title: string; description: string; imageUrl: string; imageLinkUrl: string; buttonTitle: string; imageWidth?: number; imageHeight?: number; }</code> |
+| Param         | Type                                                                                                                                                                       |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code>{ title: string; description: string; imageUrl: string; link: string; imageLinkUrl: string; buttonTitle: string; imageWidth?: number; imageHeight?: number; }</code> |
 
 --------------------
 
