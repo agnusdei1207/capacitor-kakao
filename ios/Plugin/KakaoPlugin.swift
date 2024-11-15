@@ -27,43 +27,13 @@ extension Encodable {
 public class KakaoPlugin: CAPPlugin {
     private var safariViewController: SFSafariViewController?
 
-        public override func load() {
-        instance?.isNaverAppOauthEnable = true;
-        instance?.isInAppOauthEnable = false;
-        instance?.isOnlyPortraitSupportedInIphone();
-        
-//        let useNaverApp = getConfig().getBoolean("useNaverApp", false)
-//        
-//        if (useNaverApp) {
-//            instance?.isNaverAppOauthEnable = true;
-//            instance?.isInAppOauthEnable = false;
-//        } else {
-//            instance?.isNaverAppOauthEnable = false;
-//            instance?.isInAppOauthEnable = true
-//        }
-        
-        instance?.isNaverAppOauthEnable = false;
-        instance?.isInAppOauthEnable = true;
-
-        if let serviceUrlScheme = getConfig().getString("urlScheme")  {
-            instance?.serviceUrlScheme = serviceUrlScheme;
+    public override func load() {
+        if let kakaoAppKey = getConfig().getString("kakao_app_key") {
+            KakaoSDK.initSDK(appKey: kakaoAppKey)
+            print("카카오 로그인 플러그인 로드 완료 ✅")
+        } else {
+            print("kakao_app_key가 설정되지 않았습니다.")
         }
-
-        if let consumerKey = getConfig().getString("clientId")  {
-            instance?.consumerKey = consumerKey;
-        }
-        
-        if let consumerSecret = getConfig().getString("clientSecret")  {
-            instance?.consumerSecret = consumerSecret;
-        }
-
-        
-        if let oAuthClientName = getConfig().getString("clientName")  {
-            instance?.appName = oAuthClientName;
-        }
-
-        instance?.delegate = self;
-    
     }
 
     @objc public func initialize(_ call: CAPPluginCall) {

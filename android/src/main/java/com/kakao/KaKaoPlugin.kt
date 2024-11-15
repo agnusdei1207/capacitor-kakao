@@ -17,12 +17,13 @@ import com.kakao.sdk.talk.TalkApiClient
 import com.kakao.sdk.template.model.Button
 import com.kakao.sdk.template.model.Content
 import com.kakao.sdk.template.model.Link
+import com.kakao.sdk.common.KakaoSdk
 import timber.log.Timber
 import java.lang.Exception
 
 @CapacitorPlugin(name = "KakaoPlugin")
 class KakaoPlugin : Plugin() {
-    override fun load() {
+   override fun load() {
         super.load()
         val context = context
         val config = config
@@ -32,13 +33,12 @@ class KakaoPlugin : Plugin() {
         Timber.i("clientId >>>>> $clientId")
         Timber.i("kakao_app_key >>>>> $kakao_app_key")
 
-        KakaoPlugin.apply {
-            initialize(context, clientId)
-        }
+        // 카카오 SDK 초기화
+        KakaoSdk.init(context, "1773b7a4c39a8d4b5356c8ea174aa487")
 
         Timber.i("카카오 로그인 플러그인 로드 완료 ✅")
     }
-
+    
     companion object {
         @JvmStatic
         private val gson = Gson()
