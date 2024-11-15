@@ -18,7 +18,7 @@ import com.kakao.sdk.template.model.Button
 import com.kakao.sdk.template.model.Content
 import com.kakao.sdk.template.model.Link
 import com.kakao.sdk.common.KakaoSdk
-import timber.log.Timber
+import android.util.Log
 import java.lang.Exception
 
 @CapacitorPlugin(name = "KakaoPlugin")
@@ -26,14 +26,14 @@ class KakaoPlugin : Plugin() {
     override fun load() {
         super.load()
         val context = context
-        val kakao_app_key = getConfig().getString("kakao_app_key", "default_client_id")
+        val clientId = getConfig().getString("clientId", "default_client_id")
 
-        Timber.i("kakao_app_key >>>>> $kakao_app_key")
+        Log.i("KakaoPlugin", "clientId >>>>> $clientId")
 
         // 카카오 SDK 초기화
-        KakaoSdk.init(context, kakao_app_key)
+        KakaoSdk.init(context, clientId)
 
-        Timber.i("카카오 로그인 플러그인 로드 완료 ✅")
+        Log.i("KakaoPlugin", "카카오 로그인 플러그인 로드 완료 ✅")
     }
     
     companion object {
@@ -87,7 +87,7 @@ class KakaoPlugin : Plugin() {
                 KakaoCustomTabsClient.openWithDefault(context, url)
                 call.resolve()
             } else {
-                Timber.e(TAG, publicId)
+                Log.e("KakaoPlugin", publicId)
                 call.reject("채팅 보내기 실패")
             }
         } catch (e: Exception) {
@@ -127,11 +127,11 @@ class KakaoPlugin : Plugin() {
     fun getUserInfo(call: PluginCall) {
         UserApiClient.instance.me { user, error -> 
             if (error != null) {
-                Timber.e(TAG, "Kakao user request failed", error)
+                Log.e("KakaoPlugin", "Kakao user request failed", error)
                 call.reject(error.toString())
             } else if (user != null) {
-                Timber.i(
-                    TAG, "Kakao user request succeed" +
+                Log.i(
+                    "KakaoPlugin", "Kakao user request succeed" +
                             "\nid: ${user.id}" +
                             "\nemail: ${user.kakaoAccount?.email}" +
                             "\nnickname: ${user.kakaoAccount?.profile?.nickname}" +

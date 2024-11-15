@@ -28,7 +28,7 @@ public class KakaoPlugin: CAPPlugin {
     private var safariViewController: SFSafariViewController?
 
     public override func load() {
-        if let kakaoAppKey = getConfig().getString("kakao_app_key") {
+        if let kakaoAppKey = getConfig().getString("clientId") {
             KakaoSDK.initSDK(appKey: kakaoAppKey)
             print("카카오 로그인 플러그인 로드 완료 ✅")
         } else {
@@ -37,8 +37,8 @@ public class KakaoPlugin: CAPPlugin {
     }
 
     @objc public func initialize(_ call: CAPPluginCall) {
-        if let kakao_app_key = call.getString("kakao_app_key") {
-            KakaoSDK.initSDK(appKey: kakao_app_key)
+        if let clientId = call.getString("clientId") {
+            KakaoSDK.initSDK(appKey: clientId)
             call.resolve()
         } else {
             call.reject("clientId is required")
