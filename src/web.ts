@@ -63,7 +63,7 @@ export class KakaoAuthWeb extends WebPlugin implements KakaoPlugin {
   }
 
   async logout() {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       Kakao.Auth.logout(() => {
         resolve();
       });
@@ -80,7 +80,7 @@ export class KakaoAuthWeb extends WebPlugin implements KakaoPlugin {
       refreshTokenExpiredAt: string; 
       refreshTokenExpiresIn: string; 
       tokenType: string; 
-    }>((resolve, reject) => {
+    }>((/*resolve, reject*/) => {
       // Implement the method to return the expected type
     });
   }
@@ -90,7 +90,7 @@ export class KakaoAuthWeb extends WebPlugin implements KakaoPlugin {
   }
 
   async getUserInfo() {
-    return new Promise<{ value: any }>((resolve, reject) => {
+    return new Promise<{ value: any }>((/*resolve, reject*/) => {
       // Implement the method to return the expected type
     });
   }

@@ -37,8 +37,8 @@ public class KakaoPlugin: CAPPlugin {
     }
 
     @objc public func initialize(_ call: CAPPluginCall) {
-        if let clientId = call.getString("clientId") {
-            KakaoSDK.initSDK(appKey: clientId)
+        if let kakao_app_key = call.getString("kakao_app_key") {
+            KakaoSDK.initSDK(appKey: kakao_app_key)
             call.resolve()
         } else {
             call.reject("clientId is required")

@@ -23,18 +23,15 @@ import java.lang.Exception
 
 @CapacitorPlugin(name = "KakaoPlugin")
 class KakaoPlugin : Plugin() {
-   override fun load() {
+    override fun load() {
         super.load()
         val context = context
-        val config = config
-        val clientId = config.getString("clientId")
-        val kakao_app_key = config.getString("kakao_app_key")
+        val kakao_app_key = getConfig().getString("kakao_app_key", "default_client_id")
 
-        Timber.i("clientId >>>>> $clientId")
         Timber.i("kakao_app_key >>>>> $kakao_app_key")
 
         // 카카오 SDK 초기화
-        KakaoSdk.init(context, "1773b7a4c39a8d4b5356c8ea174aa487")
+        KakaoSdk.init(context, kakao_app_key)
 
         Timber.i("카카오 로그인 플러그인 로드 완료 ✅")
     }
@@ -64,7 +61,7 @@ class KakaoPlugin : Plugin() {
 
     @PluginMethod
     fun goLogin(call: PluginCall) {
-        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error -> 
             if (error != null) {
                 call.reject(error.toString())
             } else if (token == null) {
@@ -116,7 +113,7 @@ class KakaoPlugin : Plugin() {
             .shareDefault(
                 activity,
                 feed
-            ) { linkResult: SharingResult?, error: Throwable? ->
+            ) { linkResult: SharingResult?, error: Throwable? -> 
                 if (error != null) {
                     call.reject("kakao link failed: $error")
                 } else if (linkResult != null) {
@@ -128,7 +125,7 @@ class KakaoPlugin : Plugin() {
 
     @PluginMethod
     fun getUserInfo(call: PluginCall) {
-        UserApiClient.instance.me { user, error ->
+        UserApiClient.instance.me { user, error -> 
             if (error != null) {
                 Timber.e(TAG, "Kakao user request failed", error)
                 call.reject(error.toString())
@@ -152,7 +149,7 @@ class KakaoPlugin : Plugin() {
 
     @PluginMethod
     fun goLogout(call: PluginCall) {
-        UserApiClient.instance.logout { error ->
+        UserApiClient.instance.logout { error -> 
             if (error != null) {
                 call.reject("Logout Failed")
             } else {
