@@ -36,7 +36,7 @@ class KakaoPlugin : Plugin() {
             initialize(context, clientId)
         }
 
-        Timber.i("카카오 로그인 플러그인 로드 ✅")
+        Timber.i("카카오 로그인 플러그인 로드 완료 ✅")
     }
 
     companion object {
